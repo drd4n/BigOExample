@@ -16,33 +16,39 @@ public class BigOExample {
 
     private static final int N = 100000;
     static Random r = new Random();
-
+    
+private static void initial(Integer[] a1) {
+        for (int i = 0; i < a1.length; i++) {
+            a1[i] = r.nextInt(N);
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-        Integer[] arr = new Integer[N];
-        initial(arr);
-        Integer[] arr2 = arr.clone();
+        Integer[] a1 = new Integer[N];
+        Integer[] a2 = new Integer[N];
+        Integer[] a3 = new Integer[N];
+        Integer[] a4 = new Integer[N];
+        initial(a1);
+        System.arraycopy(a1, 0, a2, 0, a1.length);
+        System.arraycopy(a1, 0, a3, 0, a1.length);
+        System.arraycopy(a1, 0, a4, 0, a1.length);
 
         //detect time duration
         long begin = System.currentTimeMillis();
-        mergeSort(arr, 0, arr.length - 1);
+        mergeSort(a1, 0, a1.length-1);
         System.out.println("Duration of merge sort: " + (System.currentTimeMillis() - begin) + " millisecond");
-        
+        for( int i = 0; i < a1.length; i++ ){
+            System.out.println(a1[i]);
+        }
 
         long begin2 = System.currentTimeMillis();
-        Arrays.sort(arr2);
+        Arrays.sort(a2);
         System.out.println("Duration of Java Sort: " + (System.currentTimeMillis() - begin2) + " millisecond");
         
 
-    }
-
-    private static void initial(Integer[] a1) {
-        for (int i = 0; i < a1.length; i++) {
-            a1[i] = r.nextInt(N);
-        }
     }
 
 
